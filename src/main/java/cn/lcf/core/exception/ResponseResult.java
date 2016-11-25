@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  *
@@ -32,10 +34,12 @@ public class ResponseResult<T> implements Serializable{
     // 消息
     private String message;
     //附加信息
+    @JsonIgnore  
     private Object[] additionalMessage;
     // 返回的数据
     private T data;
     // 是否不加密，true是不对返回结果进行加密,为false时对返回结果进行加密
+    @JsonIgnore  
     private boolean doNotEncrypt;
     
     private ResponseResult(){
@@ -233,16 +237,15 @@ public class ResponseResult<T> implements Serializable{
         }
         return set;
     }
-
     public Map<Class<?>, Set<String>> getIncludeMap() {
         return this.includeMap;
     }
-
     public Map<Class<?>, Set<String>> getExcludeMap() {
         return this.excludeMap;
     }
-
+    @JsonIgnore  
     private final Map<Class<?>, Set<String>> includeMap = new HashMap<Class<?>, Set<String>>();
+    @JsonIgnore  
     private final Map<Class<?>, Set<String>> excludeMap = new HashMap<Class<?>, Set<String>>();
 
 }

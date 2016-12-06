@@ -136,7 +136,8 @@ public class ResponseResult<T> implements Serializable{
         this.data = data;
         this.doNotEncrypt = doNotEncrypt;
         this.additionalMessage = additionalMessage;
-        this.excludeLocal(ResponseResult.class, "includeMap", "excludeMap","doNotEncrypt","additionalMessage");
+        this.includeNative(ResponseResult.class, "status","data","message","resultCode");
+//        this.excludeLocal(ResponseResult.class, "includeMap", "excludeMap","doNotEncrypt","additionalMessage");
     }
 
     public int getStatus() {
@@ -224,15 +225,15 @@ public class ResponseResult<T> implements Serializable{
         return this;
     }
 
-    private void excludeLocal(Class<?> clazz, String... properties) {
-        excludeMap.put(clazz, this.getSetFromProperties(properties));
+    private void includeNative(Class<?> clazz, String... properties) {
+        includeMap.put(clazz, this.getSetFromProperties(properties));
     }
     
     private Set<String> getSetFromProperties(String... properties) {
         Set<String> set = new HashSet<String>();
         for (String property : properties) {
             if(null != property || !"".equals(property)){
-                set.add(property);
+                set.add(property.toUpperCase());
             }
         }
         return set;

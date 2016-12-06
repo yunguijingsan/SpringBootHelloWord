@@ -15,6 +15,35 @@ public class ApplicationCondition extends Page<Application> {
 	private String code;
 	private String basePath;
 	private String description;
+	private String likeName;
+	private String likeCode;
+	private String likeBasePath;
+	private String likeDescription;
+	
+	public String getLikeName() {
+		return likeName;
+	}
+	public void setLikeName(String likeName) {
+		this.likeName = likeName;
+	}
+	public String getLikeCode() {
+		return likeCode;
+	}
+	public void setLikeCode(String likeCode) {
+		this.likeCode = likeCode;
+	}
+	public String getLikeBasePath() {
+		return likeBasePath;
+	}
+	public void setLikeBasePath(String likeBasePath) {
+		this.likeBasePath = likeBasePath;
+	}
+	public String getLikeDescription() {
+		return likeDescription;
+	}
+	public void setLikeDescription(String likeDescription) {
+		this.likeDescription = likeDescription;
+	}
 	public String getName() {
 		return name;
 	}

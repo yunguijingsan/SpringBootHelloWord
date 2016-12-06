@@ -47,12 +47,13 @@ public class ApplicationServiceImpl  implements ApplicationService{
         applicationDao.save(application);
     }
 
-    public Page<Application> searchApplication(ApplicationCondition applicationCondition){ 
+    public Page<Application> searchApplication(final ApplicationCondition applicationCondition){ 
         org.springframework.data.domain.Page<Application> page =  this.applicationDao.findAll(new Specification<Application>() {
 			
 			@Override
 			public Predicate toPredicate(Root<Application> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
+		
 				return null;
 			}
 		}, new PageRequest(applicationCondition.getPageNum()-1,applicationCondition.getPageSize()));
@@ -72,6 +73,7 @@ public class ApplicationServiceImpl  implements ApplicationService{
     }
     
     private Specifications<Application> buildSpecifications(Map<String,Object> map){
+    	
     	return null;
     	
     }

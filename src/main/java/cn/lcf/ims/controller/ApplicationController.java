@@ -54,6 +54,7 @@ public class ApplicationController{
         Page<Application> application = applicationService.searchApplication(condition);
         return ResponseResult.createSuccess(application);
     }
+    
     @ResponseBody
     @RequestMapping(value="sessionId",method=RequestMethod.GET)
     @FunctionInfo(functionName="sessionId-查询")

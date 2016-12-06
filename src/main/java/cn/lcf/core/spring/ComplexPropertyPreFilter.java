@@ -57,7 +57,7 @@ public class ComplexPropertyPreFilter implements PropertyFilter {
             if (clazz.isInstance(source)) {
                 useExcludeFlag = false;
                 Set<String> fields = entry.getValue();
-                if(fields.contains(name)){
+                if(fields.contains(name.toUpperCase())){
                 	return true;
                 }
             }
@@ -68,7 +68,7 @@ public class ComplexPropertyPreFilter implements PropertyFilter {
                 Class<?> clazz = entry.getKey();
                 if (clazz.isInstance(source)) {
                     Set<String> fields = entry.getValue();
-                    if(fields.contains(name)){
+                    if(fields.contains(name.toUpperCase())){
                     	return false;
                     }
                 }

@@ -31,6 +31,15 @@ public class TestComplexPropertyFilter {
 				SerializerFeature.WriteMapNullValue);
 		System.out.println(json);
 	}
+	
+	@Test
+	public void testIncludeAll() {
+		responseResult.include(Page.class, "code","data");
+		String json = CustomFastJsonHttpMessageConverter.serializeToJson(
+				responseResult, SerializerFeature.WriteNullStringAsEmpty,
+				SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+	}
 	@Test
 	public void testInclude() {
 		responseResult.include(Page.class, "code","data").include(Application.class, "name","code");
@@ -47,5 +56,15 @@ public class TestComplexPropertyFilter {
 				responseResult, SerializerFeature.WriteNullStringAsEmpty,
 				SerializerFeature.WriteMapNullValue);
 		System.out.println(json);
+	}
+	
+	@Test
+	public void test(){
+		Integer a=99999,b=99999;
+		System.out.println(a==b);
+
+		Integer c=-99, d=-99;
+		System.out.println(c==d);
+
 	}
 }

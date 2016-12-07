@@ -47,6 +47,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
             } else {
                 responseResult = ResponseResult.createError();
             }
+            responseResult.setMessage(ex.getMessage());
             setMessage(responseResult);
             if(request.getRequestURI().contains(".html") ||request.getRequestURI().endsWith(".js") ){
                     response.setStatus(401); 

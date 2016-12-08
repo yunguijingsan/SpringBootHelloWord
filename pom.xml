@@ -8,11 +8,33 @@
 	<properties>
 		<spring.boot.version>1.4.2.RELEASE</spring.boot.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
+		<springside.version>5.0.0-SNAPSHOT</springside.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j-over-slf4j</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<version>${spring.boot.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
 		<dependency>
@@ -28,7 +50,6 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId> <version>${spring.boot.version}</version> 
 			</dependency> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-amqp</artifactId> 
 			<version>${spring.boot.version}</version> </dependency> -->
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -55,6 +76,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.40</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -79,5 +101,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+
 	</build>
 </project>

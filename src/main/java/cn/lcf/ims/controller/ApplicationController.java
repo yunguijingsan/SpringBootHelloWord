@@ -1,5 +1,7 @@
 package cn.lcf.ims.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import cn.lcf.core.Page;
 import cn.lcf.core.exception.ResponseResult;
 import cn.lcf.core.spring.FunctionInfo;
 import cn.lcf.ims.condition.ApplicationCondition;
+import cn.lcf.ims.dao.ApplicationDao;
 import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.service.ApplicationService;
 
@@ -22,6 +25,9 @@ public class ApplicationController{
 
     @Autowired
     private ApplicationService applicationService;
+    
+    @Autowired
+    private ApplicationDao applicationDao;
 
     @ResponseBody
     @RequestMapping(method=RequestMethod.POST)
@@ -40,6 +46,16 @@ public class ApplicationController{
     }
 
     @ResponseBody
+    @RequestMapping(value="findByCodeAndName",method=RequestMethod.GET)
+    @FunctionInfo(functionName="应用-详情")
+    public  ResponseResult<Application> findByCodeAndName(String code,String name){
+    	Application application = this.applicationDao.findByCodeAndName(code, name);
+    
+    	return ResponseResult.createSuccess(application);
+    }
+    
+  
+    @ResponseBody
     @RequestMapping(method=RequestMethod.PUT)
     @FunctionInfo(functionName="应用-修改")
     public  ResponseResult<Application> updateApplication(@RequestBody Application application){
@@ -55,6 +71,14 @@ public class ApplicationController{
         return ResponseResult.createSuccess(application);
     }
     
+    @ResponseBody
+    @RequestMapping(value="searchApplication",method=RequestMethod.GET)
+    @FunctionInfo(functionName="应用-搜索")
+    public  ResponseResult<Page<Application>> searchApplicationExt(ApplicationCondition condition){
+    	
+    	return ResponseResult.createSuccess(this.applicationService.searchApplicationExt(condition));
+    }
+   
     @ResponseBody
     @RequestMapping(value="sessionId",method=RequestMethod.GET)
     @FunctionInfo(functionName="sessionId-查询")

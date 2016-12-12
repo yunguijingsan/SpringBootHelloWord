@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 @ServletComponentScan
 @Configuration("classpath*:druid.xml")
+//@EnableSwagger2
 public class HelloSpringBoot {
 	@Bean
 	public Queue queue() {

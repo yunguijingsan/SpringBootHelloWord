@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import cn.lcf.core.Page;
+import cn.lcf.core.entity.Page;
 import cn.lcf.core.exception.ServiceException;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.dao.ApplicationDao;

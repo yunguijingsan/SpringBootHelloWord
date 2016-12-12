@@ -1,4 +1,4 @@
-package cn.lcf.core;
+package cn.lcf.core.entity;
 
 import java.io.Serializable;
 import java.util.List;

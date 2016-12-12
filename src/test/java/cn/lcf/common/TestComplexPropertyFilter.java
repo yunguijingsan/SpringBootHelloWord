@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cn.lcf.core.Page;
+import cn.lcf.core.entity.Page;
 import cn.lcf.core.exception.ResponseResult;
 import cn.lcf.core.spring.CustomFastJsonHttpMessageConverter;
 import cn.lcf.ims.condition.ApplicationCondition;

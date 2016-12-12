@@ -2,7 +2,7 @@ package cn.lcf.ims.condition;
 
 import java.util.Map;
 
-import cn.lcf.core.Page;
+import cn.lcf.core.entity.Page;
 import cn.lcf.ims.entity.Application;
 
 

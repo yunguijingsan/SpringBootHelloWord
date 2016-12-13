@@ -1,7 +1,7 @@
 package cn.lcf.ims.dao;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -16,7 +16,8 @@ public interface ApplicationDao extends PagingAndSortingRepository<Application, 
 	 
 	 public Application findByCodeAndName(String code,String name);
 	 
-	 @Query(value="select * from application where code=:condition.code",countQuery="select count(*) from application",
+	 @Query(value="select * from application where code=:condition.code",
+			 countQuery="select count(*) from application where code=:condition.code",
 			 nativeQuery=true)
-	 public List<Application> searchApplication(@Param("condition")ApplicationCondition condition);
+	 public Page<Application> searchApplication(@Param("condition")ApplicationCondition condition,Pageable pageable);
 }

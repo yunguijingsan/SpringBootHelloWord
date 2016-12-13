@@ -1,7 +1,5 @@
 package cn.lcf.ims.service.impl;
 
-import java.util.List;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -20,81 +18,91 @@ import cn.lcf.ims.dao.ApplicationDao;
 import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.service.ApplicationService;
 
-
 @Service
-public class ApplicationServiceImpl  implements ApplicationService{
-    @Autowired
-    private ApplicationDao  applicationDao;
-    
-    public void addApplication(Application  application){ 
-        validate( application);
+public class ApplicationServiceImpl implements ApplicationService {
+	@Autowired
+	private ApplicationDao applicationDao;
 
-        applicationDao.save(application);
-    }
+	public void addApplication(Application application) {
+		validate(application);
 
-    public Application  findApplicationById(Long id){ 
-        validateId(id);
+		applicationDao.save(application);
+	}
 
-        Application application= applicationDao.findOne(id);
-        
-        return application;
-    }
+	public Application findApplicationById(Long id) {
+		validateId(id);
 
-    public void updateApplication( Application application){ 
-        validateId(application.getId());
-        validate(application);
-        
-        applicationDao.save(application);
-    }
+		Application application = applicationDao.findOne(id);
 
-    public Page<Application> searchApplication(final ApplicationCondition condition){ 
-        org.springframework.data.domain.Page<Application> page 
-        	=  this.applicationDao.findAll(this.buildSpecification(condition), new PageRequest(condition.getPageNum()-1,condition.getPageSize()));
-        return condition.setPage(page);
-    }
+		return application;
+	}
 
-    private void validate(Application  application) {
-        if ( application == null) {
-            throw ServiceException.create("APPLICATION.IS.NULL");
-        }
-    }
+	public void updateApplication(Application application) {
+		validateId(application.getId());
+		validate(application);
 
-    private void validateId(Long id) {
-        if (id == null) {
-            throw ServiceException.create("APPLICATION.ID.IS.NULL");
-        }
-    }
-    
-    private Specification<Application> buildSpecification(final ApplicationCondition condition){
-    	Specification<Application> spec = new Specification<Application>() {
+		applicationDao.save(application);
+	}
+
+	public Page<Application> searchApplication(
+			final ApplicationCondition condition) {
+		org.springframework.data.domain.Page<Application> page = this.applicationDao
+				.findAll(this.buildSpecification(condition), new PageRequest(
+						condition.getPageNum() - 1, condition.getPageSize()));
+		return condition.setPage(page);
+	}
+
+	private void validate(Application application) {
+		if (application == null) {
+			throw ServiceException.create("APPLICATION.IS.NULL");
+		}
+	}
+
+	private void validateId(Long id) {
+		if (id == null) {
+			throw ServiceException.create("APPLICATION.ID.IS.NULL");
+		}
+	}
+
+	private Specification<Application> buildSpecification(
+			final ApplicationCondition condition) {
+		Specification<Application> spec = new Specification<Application>() {
 			@Override
 			public Predicate toPredicate(Root<Application> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(StringUtils.isNotBlank(condition.getName())){
-					query.where(cb.equal(root.get("name").as(String.class),condition.getName()));
+				if (StringUtils.isNotBlank(condition.getName())) {
+					query.where(cb.equal(root.get("name").as(String.class),
+							condition.getName()));
 				}
-				if(StringUtils.isNotBlank(condition.getBasePath())){
-					query.where(cb.equal(root.get("basePath").as(String.class),condition.getName()));
+				if (StringUtils.isNotBlank(condition.getBasePath())) {
+					query.where(cb.equal(root.get("basePath").as(String.class),
+							condition.getName()));
 				}
-				if(StringUtils.isNotBlank(condition.getLikeName())){
-					query.where(cb.like(root.get("name").as(String.class),"%"+ condition.getLikeName()+"%"));
+				if (StringUtils.isNotBlank(condition.getLikeName())) {
+					query.where(cb.like(root.get("name").as(String.class), "%"
+							+ condition.getLikeName() + "%"));
 				}
-				if(StringUtils.isNotBlank(condition.getLikeBasePath())){
-					query.where(cb.like(root.get("basePath").as(String.class), condition.getLikeBasePath()));
+				if (StringUtils.isNotBlank(condition.getLikeBasePath())) {
+					query.where(cb.like(root.get("basePath").as(String.class),
+							condition.getLikeBasePath()));
 				}
 				return null;
 			}
 		};
-    		
-    	return spec;
-    	
-    }
+
+		return spec;
+
+	}
 
 	@Override
 	public Page<Application> searchApplicationExt(ApplicationCondition condition) {
-		List<Application> list = this.applicationDao.searchApplication(condition);
-		condition.setData(list);
+		org.springframework.data.domain.Page<Application> page = this.applicationDao
+				.searchApplication(
+						condition,
+						new PageRequest(condition.getPageNum() - 1, condition
+								.getPageSize()));
+		condition.setData(page.getContent());
 		return condition;
 	}
- 
+
 }

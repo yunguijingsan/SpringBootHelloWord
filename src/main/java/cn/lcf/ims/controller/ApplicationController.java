@@ -85,9 +85,10 @@ public class ApplicationController{
     @RequestMapping(value="listApplication",method=RequestMethod.GET)
     @FunctionInfo(functionName="应用-搜索")
     public  ResponseResult<Page<Application>> listApplication(ApplicationCondition condition){
-    	condition.setData(this.applicationMapper.listApplication(condition));
+    	condition.setData(this.applicationMapper.searchApplication(condition));
     	return ResponseResult.createSuccess((Page<Application>)condition);
     }
+    
     @ResponseBody
     @RequestMapping(value="sessionId",method=RequestMethod.GET)
     @FunctionInfo(functionName="sessionId-查询")

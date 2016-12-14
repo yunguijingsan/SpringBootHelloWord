@@ -60,8 +60,8 @@ public class TestComplexPropertyFilter {
 	
 	@Test
 	public void test(){
-		Integer a=99999,b=99999;
-		System.out.println(a==b);
+		Integer a=0x9fffffff,b=99999;
+		System.out.println(a+1);
 
 		Integer c=-99, d=-99;
 		System.out.println(c==d);

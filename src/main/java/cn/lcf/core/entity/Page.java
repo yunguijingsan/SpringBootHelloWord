@@ -39,12 +39,12 @@ public class Page<E> implements Serializable{
     }
     
     
-    public Page<E> setPage(org.springframework.data.domain.Page<E> page){
-    	this.setData(page.getContent());
-    	this.setPageSize(page.getSize());
-    	this.setTotalCount(((Long)page.getTotalElements()).intValue());
-    	return this;
-    }
+//    public Page<E> setPage(org.springframework.data.domain.Page<E> page){
+//    	this.setData(page.getContent());
+//    	this.setPageSize(page.getSize());
+//    	this.setTotalCount(((Long)page.getTotalElements()).intValue());
+//    	return this;
+//    }
 
     public int getTotalPage() {
         return totalPage;

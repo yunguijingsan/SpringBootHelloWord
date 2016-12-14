@@ -1,7 +1,5 @@
 package cn.lcf.ims.service;
 
-import java.util.List;
-
 import cn.lcf.core.entity.Page;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.entity.Application;
@@ -16,5 +14,5 @@ public interface ApplicationService {
 
     public Page<Application> searchApplication( ApplicationCondition applicationCondition );
 
-	public Page<Application> searchApplicationExt(ApplicationCondition condition);
+	public Page<Application> searchApplicationExt(ApplicationCondition applicationCondition);
 }

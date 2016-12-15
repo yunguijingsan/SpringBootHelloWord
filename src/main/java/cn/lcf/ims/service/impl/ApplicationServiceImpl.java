@@ -12,7 +12,7 @@ import cn.lcf.ims.service.ApplicationService;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
-	@Autowired
+	@Autowired(required=false)
 	private ApplicationDao applicationDao;
 
 	public void addApplication(Application application) {

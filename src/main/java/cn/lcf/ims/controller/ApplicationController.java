@@ -25,7 +25,7 @@ public class ApplicationController{
     @Autowired
     private ApplicationService applicationService;
     
-    @Autowired
+	@Autowired(required=false)
     private ApplicationDao applicationDao;
     
     @Autowired

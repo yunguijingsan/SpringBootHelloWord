@@ -46,6 +46,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Override
 	public Page<Application> searchApplicationExt(ApplicationCondition condition) {
+		
 		return condition;
 	}
 

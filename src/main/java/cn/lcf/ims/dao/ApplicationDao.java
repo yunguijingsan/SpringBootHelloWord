@@ -1,16 +1,13 @@
 package cn.lcf.ims.dao;
 
-import java.awt.print.Pageable;
+import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
-import cn.lcf.core.entity.Page;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.entity.Application;
 
-
+@Mapper
 public interface ApplicationDao {
-	 public Application findByCodeAndName(String code,String name);
-	 
-	 public Page<Application> searchApplication(@Param("condition")ApplicationCondition condition,Pageable pageable);
+	public List<Application> searchApplication(ApplicationCondition condition);
 }

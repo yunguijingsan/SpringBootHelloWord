@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 @ServletComponentScan
 @Configuration("classpath*:druid.xml")
-//@EnableSwagger2
+// @EnableSwagger2
 public class HelloSpringBoot {
 	@Bean
 	public Queue queue() {
@@ -20,6 +20,7 @@ public class HelloSpringBoot {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(HelloSpringBoot.class, args);
+		 SpringApplication.run(HelloSpringBoot.class, args);
+	
 	}
 }

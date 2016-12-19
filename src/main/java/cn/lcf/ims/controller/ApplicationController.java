@@ -15,11 +15,10 @@ import cn.lcf.core.spring.FunctionInfo;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.dao.ApplicationDao;
 import cn.lcf.ims.entity.Application;
-import cn.lcf.ims.mapper.ApplicationMapper;
 import cn.lcf.ims.service.ApplicationService;
 
-@Controller
-@RequestMapping("/resources/ims/application")
+//@Controller
+//@RequestMapping("/resources/ims/application")
 public class ApplicationController{
 
     @Autowired
@@ -28,9 +27,6 @@ public class ApplicationController{
 	@Autowired(required=false)
     private ApplicationDao applicationDao;
     
-    @Autowired
-    private ApplicationMapper applicationMapper;
-
     @ResponseBody
     @RequestMapping(method=RequestMethod.POST)
     @FunctionInfo(functionName="应用-添加",functionDescription="应用-添加")
@@ -51,8 +47,8 @@ public class ApplicationController{
     @RequestMapping(value="findByCodeAndName",method=RequestMethod.GET)
     @FunctionInfo(functionName="应用-详情")
     public  ResponseResult<Application> findByCodeAndName(String code,String name){
-    	Application application = this.applicationDao.findByCodeAndName(code, name);
-    	return ResponseResult.createSuccess(application);
+//    	Application application = this.applicationDao.findByCodeAndName(code, name);
+    	return ResponseResult.createSuccess(null);
     }
     
   
@@ -85,7 +81,7 @@ public class ApplicationController{
     @RequestMapping(value="listApplication",method=RequestMethod.GET)
     @FunctionInfo(functionName="应用-搜索")
     public  ResponseResult<Page<Application>> listApplication(ApplicationCondition condition){
-    	condition.setData(this.applicationMapper.searchApplication(condition));
+    	condition.setData(this.applicationDao.searchApplication(condition));
     	return ResponseResult.createSuccess((Page<Application>)condition);
     }
     

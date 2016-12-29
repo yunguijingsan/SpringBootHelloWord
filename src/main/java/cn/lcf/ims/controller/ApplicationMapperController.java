@@ -1,9 +1,9 @@
 package cn.lcf.ims.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,6 @@ import cn.lcf.core.exception.ResponseResult;
 import cn.lcf.core.spring.FunctionInfo;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.entity.Application;
-import cn.lcf.ims.entity.ApplicationExample;
 import cn.lcf.ims.mapper.ApplicationMapper;
 
 @Controller
@@ -25,6 +24,12 @@ public class ApplicationMapperController {
 
 	@Autowired
 	private ApplicationMapper applicationMapper;
+	
+	@Autowired
+	private SqlSessionFactory sessionFactory;
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)

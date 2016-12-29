@@ -44,8 +44,8 @@ public class MyWebSocket {
         System.out.println("来自客户端的消息:" + message);
      
         WebsocketMessage websocketMessage = new WebsocketMessage();
-        websocketMessage.setMessageTitle("服务器自动回复");
-        websocketMessage.setMessageType("echo");
+        websocketMessage.setTitle("服务器自动回复");
+        websocketMessage.setType("echo");
         websocketMessage.setData("echo:"+message);
         websocketMessage.setToken(session.getId());
         String json = CustomFastJsonHttpMessageConverter.serializeToJson(ResponseResult.createSuccess(websocketMessage));

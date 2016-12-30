@@ -15,4 +15,6 @@ public interface ApplicationService {
     public Page<Application> searchApplication( ApplicationCondition applicationCondition );
 
 	public Page<Application> searchApplicationExt(ApplicationCondition applicationCondition);
+
+	public Application findByCodeAndName(String code);
 }

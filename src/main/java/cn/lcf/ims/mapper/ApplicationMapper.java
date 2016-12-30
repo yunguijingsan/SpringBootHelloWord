@@ -1,5 +1,7 @@
 package cn.lcf.ims.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import cn.lcf.ims.entity.Application;
 
 public interface ApplicationMapper {

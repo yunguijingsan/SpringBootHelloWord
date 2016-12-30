@@ -16,18 +16,20 @@ public class ApplicationServiceImpl implements ApplicationService {
 	private ApplicationDao applicationDao;
 
 	public void addApplication(Application application) {
-
+		applicationDao.addApplication(application);
 	}
 
 	public Application findApplicationById(Long id) {
-		return null;
+		return this.applicationDao.findApplicationById(id.intValue());
 	}
 
 	public void updateApplication(Application application) {
+		this.applicationDao.updateApplication(application);
 	}
 
 	public Page<Application> searchApplication(
 			final ApplicationCondition condition) {
+		condition.setData(applicationDao.searchApplication(condition));
 		return condition;
 	}
 
@@ -48,6 +50,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public Page<Application> searchApplicationExt(ApplicationCondition condition) {
 		
 		return condition;
+	}
+
+	@Override
+	public Application findByCodeAndName(String code) {
+		return this.applicationDao.findApplicationByCode(code);
 	}
 
 }

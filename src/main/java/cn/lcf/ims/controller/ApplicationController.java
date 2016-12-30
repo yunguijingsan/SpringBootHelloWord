@@ -17,8 +17,8 @@ import cn.lcf.ims.dao.ApplicationDao;
 import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.service.ApplicationService;
 
-//@Controller
-//@RequestMapping("/resources/ims/application")
+@Controller
+@RequestMapping("/resources/ims/application")
 public class ApplicationController{
 
     @Autowired
@@ -46,9 +46,9 @@ public class ApplicationController{
     @ResponseBody
     @RequestMapping(value="findByCodeAndName",method=RequestMethod.GET)
     @FunctionInfo(functionName="应用-详情")
-    public  ResponseResult<Application> findByCodeAndName(String code,String name){
-//    	Application application = this.applicationDao.findByCodeAndName(code, name);
-    	return ResponseResult.createSuccess(null);
+    public  ResponseResult<Application> findByCodeAndName(String code){
+    	Application application = this.applicationService.findByCodeAndName(code);
+    	return ResponseResult.createSuccess(application);
     }
     
   

@@ -16,6 +16,6 @@
 		<plugin interceptor="cn.lcf.core.sql.PaginationInterceptor" />
     </plugins>
     <mappers>
-    	<mapper resource="cn.lcf.ims.mapper"/>
+    	<mapper resource="cn/lcf/*/mapping/*.xml"/>
     </mappers>
 </configuration>

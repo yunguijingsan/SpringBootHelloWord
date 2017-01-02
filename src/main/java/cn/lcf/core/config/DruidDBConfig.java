@@ -1,4 +1,4 @@
-package cn.lcf.core.spring;
+package cn.lcf.core.config;
 
 import java.sql.SQLException;
 

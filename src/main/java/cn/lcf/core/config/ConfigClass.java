@@ -1,10 +1,9 @@
-package cn.lcf.core.spring;
+package cn.lcf.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@ImportResource(locations = { "classpath:application-druid.xml",
-		"classpath:mybatis-config.xml" })
+@ImportResource(locations = { "classpath:application-druid.xml"})
 public class ConfigClass {
 }

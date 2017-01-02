@@ -23,10 +23,10 @@ public class SignatureRequestWrapper extends HttpServletRequestWrapper {
 
     public SignatureRequestWrapper(HttpServletRequest request,String token) throws IOException {
         super(request);
-        System.out.println("desKey秘钥:"+token);
+//        System.out.println("desKey秘钥:"+token);
         ServletInputStream stream = this.getRequest().getInputStream();
         String body  = IOUtils.toString(stream, "UTF-8");
-        System.out.println("未解密请求体:"+body);
+//        System.out.println("未解密请求体:"+body);
         try {
             if(!StringUtils.isBlank(body) && ! body.trim().startsWith("{")){
                body = DesEncrypt.decrypt(body, token);
@@ -35,7 +35,7 @@ public class SignatureRequestWrapper extends HttpServletRequestWrapper {
             e.printStackTrace();
         }
         requestBody = body;
-        System.out.println("解密后请求体:"+requestBody);
+//        System.out.println("解密后请求体:"+requestBody);
     }
 
     @Override

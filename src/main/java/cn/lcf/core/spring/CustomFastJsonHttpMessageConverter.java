@@ -37,7 +37,9 @@ public class CustomFastJsonHttpMessageConverter extends FastJsonHttpMessageConve
     @Override
     protected void writeInternal(Object object, HttpOutputMessage httpOutputMessage) throws IOException,
                                                                                             HttpMessageNotWritableException {
-        if (object instanceof ResponseResult) {
+        
+    	System.out.println(object.getClass());
+    	if (object instanceof ResponseResult) {
             writeResponseResult(object, httpOutputMessage);
         } else {
             super.writeInternal(object, httpOutputMessage);
@@ -79,6 +81,7 @@ public class CustomFastJsonHttpMessageConverter extends FastJsonHttpMessageConve
         for (SerializerFeature feature : features) {
             serializer.config(feature, true);
         }
+        serializer.config(SerializerFeature.WriteMapNullValue, true);
         serializer.write(responseResult);
         String result = serializeWriter.toString();
 		return result;

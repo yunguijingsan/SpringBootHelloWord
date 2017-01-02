@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 import cn.lcf.ims.condition.ApplicationCondition;
@@ -16,7 +16,8 @@ import cn.lcf.ims.entity.Application;
 public interface ApplicationDao{
 
 	@InsertProvider(type=ApplicationSqlProvider.class,method="addApplication")
-    public void addApplication(Application application);
+	@SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    public  void addApplication(Application application);
 
 	@Select("select * from application where id=#{id}")
     public Application findApplicationById(Integer id);

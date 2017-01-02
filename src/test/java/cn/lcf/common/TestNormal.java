@@ -1,8 +1,42 @@
 package cn.lcf.common;
 
+import java.lang.reflect.Method;
+
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.junit.Test;
 
+import cn.lcf.core.exception.ResponseResult;
+import cn.lcf.core.spring.CustomFastJsonHttpMessageConverter;
+import cn.lcf.ims.controller.ApplicationController;
+import cn.lcf.ims.entity.Application;
+
 public class TestNormal {
+	
+	@Test
+	public void testMatch(){
+		ResponseResult<Application>  result =ResponseResult.createSuccess(new Application());
+		System.out.println(result.getDataClazz());
+		System.out.println(CustomFastJsonHttpMessageConverter.serializeToJson(result));
+	}
+	
+	@Test
+	public void getParameterType(){
+		Class clazz = ApplicationController.class;
+		try {
+			Method method = clazz.getMethod("addApplication", Application.class);
+			Class  returnClass =  method.getReturnType();
+			System.out.println(method.getGenericReturnType());
+			method.getDeclaringClass();
+			System.out.println(returnClass);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
 	public void testThead(){
 		for (int i = 0; i < 2; i++) {

@@ -1,5 +1,7 @@
 package cn.lcf.ims.controller;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +9,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriComponents;
+
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 
 import cn.lcf.core.entity.Page;
 import cn.lcf.core.exception.ResponseResult;
-import cn.lcf.core.spring.FunctionInfo;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.dao.ApplicationDao;
 import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.service.ApplicationService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.models.Swagger;
+import springfox.documentation.service.Documentation;
+import springfox.documentation.spring.web.DocumentationCache;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 
 @Controller
 @RequestMapping("/resources/ims/application")
@@ -24,12 +37,16 @@ public class ApplicationController{
     @Autowired
     private ApplicationService applicationService;
     
+    @Autowired
+    private DocumentationCache documentationCache;
+    
 	@Autowired(required=false)
     private ApplicationDao applicationDao;
     
     @ResponseBody
     @RequestMapping(method=RequestMethod.POST)
-    @FunctionInfo(functionName="应用-添加",functionDescription="应用-添加")
+    @ApiOperation(value="应用-添加",notes="应用-添加")
+    @ApiResponse(response=Application.class, code = 0, message = "")
     public ResponseResult<Application> addApplication(@RequestBody Application application){
     	applicationService.addApplication(application);
 	 	return ResponseResult.createSuccess(application);
@@ -37,15 +54,16 @@ public class ApplicationController{
 
     @ResponseBody
     @RequestMapping(method=RequestMethod.GET)
-    @FunctionInfo(functionName="应用-详情")
+    @ApiOperation(value="应用-详情")
     public  ResponseResult<Application> findApplicationById(Long id){
     	Application application = applicationService.findApplicationById(id);
+    	System.out.print(documentationCache.documentationByGroup("default"));
     	return ResponseResult.createSuccess(application);
     }
 
     @ResponseBody
     @RequestMapping(value="findByCodeAndName",method=RequestMethod.GET)
-    @FunctionInfo(functionName="应用-详情")
+    @ApiOperation(value="应用-详情")
     public  ResponseResult<Application> findByCodeAndName(String code){
     	Application application = this.applicationService.findByCodeAndName(code);
     	return ResponseResult.createSuccess(application);
@@ -54,7 +72,7 @@ public class ApplicationController{
   
     @ResponseBody
     @RequestMapping(method=RequestMethod.PUT)
-    @FunctionInfo(functionName="应用-修改")
+    @ApiOperation(value="应用-修改")
     public  ResponseResult<Application> updateApplication(@RequestBody Application application){
     	applicationService.updateApplication(application);
     	return ResponseResult.createSuccess(application);
@@ -62,7 +80,7 @@ public class ApplicationController{
 
     @ResponseBody
     @RequestMapping(value="search",method=RequestMethod.GET)
-    @FunctionInfo(functionName="应用-查询")
+    @ApiOperation(value="应用-查询")
     public  ResponseResult<Page<Application>> searchApplication(ApplicationCondition condition){
         Page<Application> application = applicationService.searchApplication(condition);
         return ResponseResult.createSuccess(application);
@@ -70,7 +88,7 @@ public class ApplicationController{
     
     @ResponseBody
     @RequestMapping(value="searchApplication",method=RequestMethod.GET)
-    @FunctionInfo(functionName="应用-搜索")
+    @ApiOperation(value="应用-搜索")
     public  ResponseResult<Page<Application>> searchApplicationExt(ApplicationCondition condition){
     	
     	return ResponseResult.createSuccess(this.applicationService.searchApplicationExt(condition));
@@ -79,16 +97,30 @@ public class ApplicationController{
     
     @ResponseBody
     @RequestMapping(value="listApplication",method=RequestMethod.GET)
-    @FunctionInfo(functionName="应用-搜索")
+    @ApiOperation(value="应用-搜索")
     public  ResponseResult<Page<Application>> listApplication(ApplicationCondition condition){
     	condition.setData(this.applicationDao.searchApplication(condition));
     	return ResponseResult.createSuccess((Page<Application>)condition);
     }
     
+    
+    @Autowired
+    private ServiceModelToSwagger2Mapper mapper;
+
     @ResponseBody
     @RequestMapping(value="sessionId",method=RequestMethod.GET)
-    @FunctionInfo(functionName="sessionId-查询")
-    public  ResponseResult<String> token(HttpServletRequest request){
-        return ResponseResult.createSuccess(request.getSession().getId());
+    @ApiOperation(value="sessionId-查询")
+    public  ResponseResult<Swagger> token(
+    	 @RequestParam(value = "group", required = false) String swaggerGroup,
+         HttpServletRequest servletRequest) {
+
+       String groupName = Optional.fromNullable(swaggerGroup).or(Docket.DEFAULT_GROUP_NAME);
+       Documentation documentation = documentationCache.documentationByGroup(groupName);
+       if (documentation == null) {
+         return ResponseResult.createSuccess();
+       }
+       Swagger swagger = mapper.mapDocumentation(documentation);
+
+        return ResponseResult.createSuccess(swagger);
     }
 }

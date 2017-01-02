@@ -11,7 +11,7 @@
 
 		<!-- mysql配置 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/ims" userId="root"
+			connectionURL="jdbc:mysql://localhost:3306/ims?useSSL=false" userId="root"
 			password="root">
 		</jdbcConnection>
 
@@ -21,21 +21,21 @@
 
 		<!-- model生成文件的存放位置 -->
 		<javaModelGenerator targetPackage="cn.lcf.ims.entity"
-			targetProject="D:\Work\workspace\SpringBootHelloWord\src\main\java">
+			targetProject="C:\Users\Administrator\git\SpringBootHelloWord\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- sqlmap生成文件的存放位置 -->
 		<sqlMapGenerator targetPackage="cn.lcf.ims.mapping"
-			targetProject="D:\Work\workspace\SpringBootHelloWord\src\main\java">
+			targetProject="C:\Users\Administrator\git\SpringBootHelloWord\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- dao生成文件的存放位置 -->
-		<javaClientGenerator type="XMLMAPPER"
+		<javaClientGenerator type="ANNOTATEDMAPPER"
 			targetPackage="cn.lcf.ims.mapper"
-			targetProject="D:\Work\workspace\SpringBootHelloWord\src\main\java">
+			targetProject="C:\Users\Administrator\git\SpringBootHelloWord\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
  		<table tableName="application" domainObjectName="Application"

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
@@ -22,7 +23,43 @@ public class MyBatisGeneratorApp {
 			DefaultShellCallback callback = new DefaultShellCallback(overwrite);
 			MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
 					callback, warnings);
-			myBatisGenerator.generate(null);
+			myBatisGenerator.generate(new ProgressCallback() {
+				
+				@Override
+				public void startTask(String taskName) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void saveStarted(int totalTasks) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void introspectionStarted(int totalTasks) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void generationStarted(int totalTasks) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void done() {
+					System.out.println("done....");
+				}
+				
+				@Override
+				public void checkCancel() throws InterruptedException {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

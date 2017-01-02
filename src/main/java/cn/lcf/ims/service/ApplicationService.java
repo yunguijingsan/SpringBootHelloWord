@@ -12,9 +12,9 @@ public interface ApplicationService {
 
     public void updateApplication(Application application);
 
-    public Page<Application> searchApplication( ApplicationCondition applicationCondition );
+    public Page<Application> searchApplication( ApplicationCondition condition );
 
-	public Page<Application> searchApplicationExt(ApplicationCondition applicationCondition);
+	public Page<Application> searchApplicationExt(ApplicationCondition condition);
 
 	public Application findByCodeAndName(String code);
 }

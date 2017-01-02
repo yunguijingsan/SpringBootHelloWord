@@ -15,7 +15,6 @@ public class TestNormal {
 	@Test
 	public void testMatch(){
 		ResponseResult<Application>  result =ResponseResult.createSuccess(new Application());
-		System.out.println(result.getDataClazz());
 		System.out.println(CustomFastJsonHttpMessageConverter.serializeToJson(result));
 	}
 	

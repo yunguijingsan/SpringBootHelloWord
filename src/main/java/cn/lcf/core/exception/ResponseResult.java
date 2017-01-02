@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * 统一的返回结果
  */
-public class ResponseResult<T>  extends Result<T> implements Serializable{
+public class ResponseResult<T> implements Serializable{
     private static final long serialVersionUID = -6317348280525129379L;
 
     /**
@@ -41,8 +41,6 @@ public class ResponseResult<T>  extends Result<T> implements Serializable{
     // 是否不加密，true是不对返回结果进行加密,为false时对返回结果进行加密
     @JsonIgnore  
     private boolean doNotEncrypt;
-    
-    private Class<T> dataClazz;
     
     private ResponseResult(){
         
@@ -138,12 +136,7 @@ public class ResponseResult<T>  extends Result<T> implements Serializable{
         this.data = data;
         this.doNotEncrypt = doNotEncrypt;
         this.additionalMessage = additionalMessage;
-        this.includeNative(ResponseResult.class, "status","data","message","resultCode");
-        if(data == null){
-        	this.dataClazz=(Class<T>) Object.class;
-        }else{
-        	this.dataClazz =  (Class<T>) data.getClass();
-        }
+        this.includeNative(ResponseResult.class, "status","data","message","resultCode");  
 //        this.excludeLocal(ResponseResult.class, "includeMap", "excludeMap","doNotEncrypt","additionalMessage");
     }
 
@@ -252,15 +245,6 @@ public class ResponseResult<T>  extends Result<T> implements Serializable{
         return this.excludeMap;
     }
     
-    public Class<T> getDataClazz() {
-		return dataClazz;
-	}
-	public void setDataClazz(Class<T> dataClazz) {
-		this.dataClazz = dataClazz;
-	}
-
-
-
 	@JsonIgnore  
     private final Map<Class<?>, Set<String>> includeMap = new HashMap<Class<?>, Set<String>>();
     @JsonIgnore  

@@ -1,7 +1,5 @@
 package cn.lcf.ims.controller;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.UriComponents;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Strings;
 
 import cn.lcf.core.entity.Page;
 import cn.lcf.core.exception.ResponseResult;
 import cn.lcf.ims.condition.ApplicationCondition;
-import cn.lcf.ims.dao.ApplicationDao;
+import cn.lcf.ims.dao.ims.ApplicationDao;
 import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.service.ApplicationService;
 import io.swagger.annotations.ApiOperation;
@@ -99,8 +95,7 @@ public class ApplicationController{
     @RequestMapping(value="listApplication",method=RequestMethod.GET)
     @ApiOperation(value="应用-搜索")
     public  ResponseResult<Page<Application>> listApplication(ApplicationCondition condition){
-    	condition.setData(this.applicationDao.searchApplication(condition));
-    	return ResponseResult.createSuccess((Page<Application>)condition);
+    	return ResponseResult.createSuccess(applicationService.searchApplication(condition));
     }
     
     

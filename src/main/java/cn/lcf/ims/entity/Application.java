@@ -1,5 +1,8 @@
 package cn.lcf.ims.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
+
 public class Application {
     /**
      *
@@ -8,6 +11,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
+	@ApiModelProperty(value="应用ID")
     private Integer id;
 
     /**
@@ -17,6 +21,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
+	@ApiModelProperty(value="应用名称",required=true)
     private String name;
 
     /**
@@ -26,6 +31,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
+	@ApiModelProperty(value="应用简称",required=true)
     private String code;
 
     /**
@@ -35,6 +41,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
+	@ApiModelProperty(value="应用描述")
     private String description;
 
     /**
@@ -44,6 +51,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
+	@ApiModelProperty(value="应用路径")
     private String basePath;
 
     /**

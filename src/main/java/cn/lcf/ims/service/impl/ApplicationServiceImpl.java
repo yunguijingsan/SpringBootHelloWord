@@ -16,6 +16,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	private ApplicationDao applicationDao;
  
 	public void addApplication(Application application) {
+		this.validate(application);
 		applicationDao.addApplication(application);
 	}
 
@@ -29,8 +30,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	public Page<Application> searchApplication(
 			final ApplicationCondition condition) {
-		condition.setData(applicationDao.searchApplication(condition));
-		return condition;
+		return this.applicationDao.searchApplication(condition);
 	}
 
 	private void validate(Application application) {
@@ -49,7 +49,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public Page<Application> searchApplicationExt(ApplicationCondition condition) {
 		
-		return condition;
+		return new Page();
 	}
 
 	@Override

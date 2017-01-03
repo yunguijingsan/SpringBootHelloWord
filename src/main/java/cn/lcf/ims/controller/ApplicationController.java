@@ -1,5 +1,12 @@
 package cn.lcf.ims.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.models.Swagger;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.base.Optional;
-
+import springfox.documentation.service.Documentation;
+import springfox.documentation.spring.web.DocumentationCache;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
 import cn.lcf.core.entity.Page;
 import cn.lcf.core.exception.ResponseResult;
 import cn.lcf.ims.condition.ApplicationCondition;
 import cn.lcf.ims.dao.ims.ApplicationDao;
 import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.service.ApplicationService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.models.Swagger;
-import springfox.documentation.service.Documentation;
-import springfox.documentation.spring.web.DocumentationCache;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
+
+import com.google.common.base.Optional;
 
 @Controller
 @RequestMapping("/resources/ims/application")
@@ -41,16 +45,22 @@ public class ApplicationController{
     
     @ResponseBody
     @RequestMapping(method=RequestMethod.POST)
-    @ApiOperation(value="应用-添加",notes="应用-添加")
-    @ApiResponse(response=Application.class, code = 0, message = "")
+    @ApiOperation(value="应用-添加",notes="应用-添加",response=Application.class)
     public ResponseResult<Application> addApplication(@RequestBody Application application){
     	applicationService.addApplication(application);
 	 	return ResponseResult.createSuccess(application);
     }
+    @ResponseBody
+    @RequestMapping(value="addBatch",method=RequestMethod.POST)
+    @ApiOperation(value="应用-添加",notes="应用-添加",response=Application.class,responseContainer="List")
+    public ResponseResult<List<Application>> addApplicationBatch(@RequestBody Application[] application){
+    	List<Application> list =new ArrayList<Application>(); 
+	 	return ResponseResult.createSuccess(list);
+    }
 
     @ResponseBody
     @RequestMapping(method=RequestMethod.GET)
-    @ApiOperation(value="应用-详情")
+    @ApiOperation(value="应用-详情",response=Application.class)
     public  ResponseResult<Application> findApplicationById(Long id){
     	Application application = applicationService.findApplicationById(id);
     	System.out.print(documentationCache.documentationByGroup("default"));
@@ -59,7 +69,7 @@ public class ApplicationController{
 
     @ResponseBody
     @RequestMapping(value="findByCodeAndName",method=RequestMethod.GET)
-    @ApiOperation(value="应用-详情")
+    @ApiOperation(value="应用-详情",response=Application.class)
     public  ResponseResult<Application> findByCodeAndName(String code){
     	Application application = this.applicationService.findByCodeAndName(code);
     	return ResponseResult.createSuccess(application);
@@ -81,10 +91,16 @@ public class ApplicationController{
         Page<Application> application = applicationService.searchApplication(condition);
         return ResponseResult.createSuccess(application);
     }
-    
+    @ResponseBody
+    @RequestMapping(value="page",method=RequestMethod.GET)
+    @ApiOperation(value="应用-page")
+    public  ResponseResult<Page<Application>> page(Page<Application> condition){
+        Page<Application> application = applicationService.searchApplication(null);
+        return ResponseResult.createSuccess(application);
+    }
     @ResponseBody
     @RequestMapping(value="searchApplication",method=RequestMethod.GET)
-    @ApiOperation(value="应用-搜索")
+    @ApiOperation(value="应用-搜索",response=Application.class,notes="分页")
     public  ResponseResult<Page<Application>> searchApplicationExt(ApplicationCondition condition){
     	
     	return ResponseResult.createSuccess(this.applicationService.searchApplicationExt(condition));

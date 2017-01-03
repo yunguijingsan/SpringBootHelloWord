@@ -1,10 +1,17 @@
 package cn.lcf.core.exception;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.hibernate.type.TrueFalseType;
+import org.springframework.mock.staticmock.MockStaticEntityMethods;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * 统一的返回结果
  */
+@ApiModel(description="统一的返回结果")
 public class ResponseResult<T> implements Serializable{
     private static final long serialVersionUID = -6317348280525129379L;
 
@@ -26,17 +34,21 @@ public class ResponseResult<T> implements Serializable{
      * 6：请求失效,可能是因为超时或者重复提交
      * 7：签名错误
      */
+    @ApiModelProperty(value="状态码",example="1",readOnly=true,required=true)
     private int status;
     /*
 	 * 业务失败结果码 只有状态码为 2 时才生效，状态码不为 2时业务结果为 0
 	 */
+    @ApiModelProperty(value="业务失败结果码",readOnly=true,required=true)
     private String resultCode;
     // 消息
+    @ApiModelProperty(value="业务失败返回消息",readOnly=true,required=true)
     private String message;
     //附加信息
     @JsonIgnore  
     private Object[] additionalMessage;
     // 返回的数据
+    @ApiModelProperty(value="返回数据",example="{}",readOnly=true,required=true)
     private T data;
     // 是否不加密，true是不对返回结果进行加密,为false时对返回结果进行加密
     @JsonIgnore  

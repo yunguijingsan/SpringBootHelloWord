@@ -34,10 +34,9 @@ public class ApplicationDaoImpl extends BaseDaoImpl implements ApplicationDao {
 	}
 
 	@Override
-	public Page<Application> searchApplication(ApplicationCondition applicationCondition) {
-		List<Application> list =  this.applicationMapper.searchApplication(applicationCondition);
-		applicationCondition.setData(list);
-		return applicationCondition;
+	public Page<Application> searchApplication(ApplicationCondition condition) {
+		List<Application> list =  this.applicationMapper.searchApplication(condition);
+		return new Page();
 	}
 
 	@Override

@@ -1,14 +1,17 @@
 package cn.lcf.common;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
-import org.apache.ibatis.executor.ReuseExecutor;
 import org.junit.Test;
 
 import cn.lcf.core.exception.ResponseResult;
 import cn.lcf.core.spring.CustomFastJsonHttpMessageConverter;
 import cn.lcf.ims.controller.ApplicationController;
 import cn.lcf.ims.entity.Application;
+
+import com.alibaba.fastjson.util.ParameterizedTypeImpl;
 
 public class TestNormal {
 	
@@ -25,7 +28,8 @@ public class TestNormal {
 			Method method = clazz.getMethod("addApplication", Application.class);
 			Class  returnClass =  method.getReturnType();
 			System.out.println(method.getGenericReturnType());
-			method.getDeclaringClass();
+			ParameterizedType type = (ParameterizedType) method.getGenericReturnType();
+			System.out.println(type.getActualTypeArguments()[0].toString());
 			System.out.println(returnClass);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block

@@ -22,6 +22,7 @@ public class Application {
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
 	@ApiModelProperty(value="应用名称",required=true)
+	@ApiParam
     private String name;
 
     /**
@@ -32,6 +33,7 @@ public class Application {
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
 	@ApiModelProperty(value="应用简称",required=true)
+	@ApiParam
     private String code;
 
     /**
@@ -42,6 +44,7 @@ public class Application {
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
 	@ApiModelProperty(value="应用描述")
+	@ApiParam
     private String description;
 
     /**

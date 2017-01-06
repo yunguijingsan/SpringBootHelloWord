@@ -1,24 +1,29 @@
 package cn.lcf.common;
 
+import io.swagger.models.Tag;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 import org.junit.Test;
 
-import cn.lcf.core.exception.ResponseResult;
-import cn.lcf.core.spring.CustomFastJsonHttpMessageConverter;
+import springfox.documentation.spring.web.scanners.ApiListingReferenceScanner;
 import cn.lcf.ims.controller.ApplicationController;
 import cn.lcf.ims.entity.Application;
 
-import com.alibaba.fastjson.util.ParameterizedTypeImpl;
+import com.google.common.collect.Multimaps;
 
 public class TestNormal {
-	
+	private void call(Tag obj,Tag... objs){
+		
+	}
+	Tag app = new Tag().name("APP").description("app相关接口");
+	Tag user = new Tag().name("USER").description("用户想接口"); 
+
 	@Test
 	public void testMatch(){
-		ResponseResult<Application>  result =ResponseResult.createSuccess(new Application());
-		System.out.println(CustomFastJsonHttpMessageConverter.serializeToJson(result));
+		call(app);
+		call(app,user);
 	}
 	
 	@Test

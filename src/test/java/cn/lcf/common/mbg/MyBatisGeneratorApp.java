@@ -16,7 +16,7 @@ public class MyBatisGeneratorApp {
 		try {
 			List<String> warnings = new ArrayList<String>();
 			boolean overwrite = true;
-			File configFile = new File("src/main/resources/mbg/generatorConfig.xml");
+			File configFile = new File("src/main/resources/mbg/generatorConfig-orcl.xml");
 			System.out.println(configFile.getAbsolutePath());
 			ConfigurationParser cp = new ConfigurationParser(warnings);
 			Configuration config = cp.parseConfiguration(configFile);

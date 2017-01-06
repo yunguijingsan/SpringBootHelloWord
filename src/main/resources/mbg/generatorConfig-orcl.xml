@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE generatorConfiguration
+	  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 驱动jar包，mssql使用jtds-1.2.jar,mysql使用mysql-connector-java-5.0.8-bin.jar -->
+	<classPathEntry
+		location="C:\Users\Administrator\.m2\repository\com\oracle\ojdbc14\10.2.0.4\ojdbc14-10.2.0.4.jar" />
+
+	<context id="FreeCMS_Tables" targetRuntime="MyBatis3">
+
+		<!-- mysql配置 -->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@//192.168.30.233:1521/pdbdev.ibenew.com" userId="apps"
+			password="apps">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- model生成文件的存放位置 -->
+		<javaModelGenerator targetPackage="cn.lcf.ims.entity"
+			targetProject="C:\Users\Administrator\git\SpringBootHelloWord\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- sqlmap生成文件的存放位置 -->
+		<sqlMapGenerator targetPackage="cn.lcf.ims.mapping"
+			targetProject="C:\Users\Administrator\git\SpringBootHelloWord\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- dao生成文件的存放位置 -->
+		<javaClientGenerator type="ANNOTATEDMAPPER"
+			targetPackage="cn.lcf.ims.mapper"
+			targetProject="C:\Users\Administrator\git\SpringBootHelloWord\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+ 		<table tableName="XSA_APPLICATION" domainObjectName="XsaApplication"
+ 		enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    enableSelectByExample="false" selectByExampleQueryId="false"/>  
+	</context>
+</generatorConfiguration>
+

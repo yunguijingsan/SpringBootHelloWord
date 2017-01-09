@@ -1,26 +1,17 @@
 package cn.lcf.core.entity;
 
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 
 import java.io.Serializable;
 import java.util.List;
 
-import cn.lcf.ims.entity.Application;
-
-public class Page<E> implements Serializable {
+public class Page<E> extends PageCondition implements Serializable {
 	
 
 	@ApiParam(hidden = true)
 	private List<E> data; // 数据集合
 	
 	private static final long serialVersionUID = -283738461742224367L;
-	@ApiModelProperty(value = "每页数据条数", example = "10", allowableValues = "range[1,infinity]")
-	@ApiParam(value = "每页数据条数", defaultValue = "10", allowableValues = "range[1,infinity]")
-	private int pageSize = 10; // 每页多少条,默认10
-	@ApiModelProperty(value = "页码", example = "1", allowableValues = "range[1,infinity]")
-	@ApiParam(value = "页码", defaultValue = "1", allowableValues = "range[1,infinity]")
-	private int pageNum; // 页码 ，从1开始
 	@ApiParam(hidden = true)
 	private int totalCount; // 总条数
 
@@ -62,24 +53,6 @@ public class Page<E> implements Serializable {
 
 	public int getTotalPage() {
 		return totalPage;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public int getPageNum() {
-		if (this.pageNum == 0)
-			pageNum = 1;
-		return pageNum;
-	}
-
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
 	}
 
 	@ApiParam(value = "返回的实际数据", hidden = true, required = false)

@@ -3,6 +3,8 @@ package cn.lcf.ims.dao.ims.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import cn.lcf.core.entity.Page;
@@ -13,6 +15,7 @@ import cn.lcf.ims.entity.Application;
 import cn.lcf.ims.mapper.ApplicationMapper;
 
 @Repository
+@Order(value=Ordered.HIGHEST_PRECEDENCE)
 public class ApplicationDaoImpl extends BaseDaoImpl implements ApplicationDao {
 
 	@Autowired

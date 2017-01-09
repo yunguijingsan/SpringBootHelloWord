@@ -2,11 +2,11 @@ package cn.lcf.core.websocket;
 
 public class WebsocketMessage {
 	
-	private String token;
-	private String id;
-	private String type;
-	private String title;
-	private Object data;
+	private String token;//身份标识
+	private String id;//消息id
+	private String type;//消息类型
+	private String title;//消息标头
+	private Object data;//消息数据
 	
 	public String getToken() {
 		return token;

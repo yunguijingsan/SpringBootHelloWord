@@ -11,7 +11,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
-	@ApiModelProperty(value="应用ID")
+	@ApiModelProperty(value="应用ID",position=-1,readOnly=true)
     private Integer id;
 
     /**
@@ -21,7 +21,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
-	@ApiModelProperty(value="应用名称",required=true)
+	@ApiModelProperty(value="应用名称",required=true,position=-3)
 	@ApiParam
     private String name;
 
@@ -32,7 +32,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
-	@ApiModelProperty(value="应用简称",required=true,allowableValues="public,private")
+	@ApiModelProperty(value="应用简称",required=true,allowableValues="public,private",position=-3)
 	@ApiParam
     private String code;
 
@@ -43,7 +43,7 @@ public class Application {
      *
      * @mbg.generated Mon Jan 02 19:26:45 GMT+08:00 2017
      */
-	@ApiModelProperty(value="应用描述")
+	@ApiModelProperty(value="应用描述",position=-1)
 	@ApiParam
     private String description;
 

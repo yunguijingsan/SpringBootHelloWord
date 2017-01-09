@@ -102,6 +102,7 @@ public class ApplicationController {
 	@ResponseBody
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	@ApiOperation(value = "应用-查询")
+	@ApiParam(name="name",value="应用名称Param",hidden=true)
 	public ResponseResult<Page<Application>> searchApplication(
 			ApplicationCondition condition) {
 		Page<Application> application = applicationService
